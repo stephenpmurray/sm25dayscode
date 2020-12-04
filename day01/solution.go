@@ -11,7 +11,7 @@ import (
 
 func importInput(fileName string) (values []int, err error) {
 	pwd, _ := os.Getwd()
-	filePath := pwd + "/" + fileName
+	filePath := pwd + "/day01/" + fileName //TODO: this filepath should be different when running tests..
 
 	// open fstream
 	file, err := os.Open(filePath)
@@ -35,8 +35,9 @@ func importInput(fileName string) (values []int, err error) {
 	return values, nil
 }
 
-func checkList(values []int) (summed [2]int, err error) {
+func ansOne(values []int) (summed [2]int, err error) {
 
+	// naive approach
 	for idx, n := range values {
 		for _, m := range values[idx+1:] {
 			if n+m == 2020 {
@@ -48,16 +49,44 @@ func checkList(values []int) (summed [2]int, err error) {
 	return summed, errors.New("didn't find a pair that sums to 2020")
 }
 
-func main() {
+func ansTwo(values []int) (summed [3]int, err error) {
+	// naive approach
+	for idx, n := range values {
+		for jdx, m := range values[idx+1:] {
+			for _, o := range values[jdx+1:] {
+				if n+m+o == 2020 {
+					return [3]int{n, m, o}, nil
+				}
+			}
+		}
+
+	}
+	return [3]int{}, errors.New("didnt find a triplet that sums to 2020")
+}
+
+func RunDay01() {
 	// import input list to array
 	values, err := importInput("input")
 	if err != nil {
 		log.Fatal("failed to import file, exiting...")
 	}
 
-	// check list for matching pairs
-	summed, err := checkList(values)
+	// answer 1
+	summed, err := ansOne(values)
 	if err != nil {
-		fmt.Println(summed)
+		os.Exit(1)
 	}
+
+	product := summed[0] * summed[1]
+	fmt.Println(product)
+
+	// answer 2
+	triplet, err := ansTwo(values)
+	if err != nil {
+		os.Exit(1)
+	}
+
+	product = triplet[0] * triplet[1] * triplet[2]
+	fmt.Println(product)
+
 }

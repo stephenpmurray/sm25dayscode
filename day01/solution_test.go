@@ -42,7 +42,7 @@ func Test_importInput(t *testing.T) {
 	}
 }
 
-func Test_checkList(t *testing.T) {
+func Test_ansOne(t *testing.T) {
 	type args struct {
 		values []int
 	}
@@ -67,13 +67,50 @@ func Test_checkList(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotSummed, err := checkList(tt.args.values)
+			gotSummed, err := ansOne(tt.args.values)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("checkList() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotSummed, tt.wantSummed) {
 				t.Errorf("checkList() = %v, want %v", gotSummed, tt.wantSummed)
+			}
+		})
+	}
+}
+
+func Test_ansTwo(t *testing.T) {
+	type args struct {
+		values []int
+	}
+	tests := []struct {
+		name       string
+		args       args
+		wantSummed [3]int
+		wantErr    bool
+	}{
+		{
+			name:       "return correct value triplet",
+			args:       args{[]int{15, 1112, 114, 900, 1100, 20, 123, 254}},
+			wantSummed: [3]int{900, 1100, 20},
+			wantErr:    false,
+		},
+		{
+			"returns error when a matching pair can't be found",
+			args{[]int{}},
+			[3]int{},
+			true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotSummed, err := ansTwo(tt.args.values)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ansTwo() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(gotSummed, tt.wantSummed) {
+				t.Errorf("ansTwo() = %v, want %v", gotSummed, tt.wantSummed)
 			}
 		})
 	}
