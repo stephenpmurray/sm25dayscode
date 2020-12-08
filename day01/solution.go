@@ -10,8 +10,18 @@ import (
 )
 
 func importInput(fileName string) (values []int, err error) {
+	var filePath string
+
 	pwd, _ := os.Getwd()
-	filePath := pwd + "/day01/" + fileName //TODO: this filepath should be different when running tests..
+	// check both this folder and day folder in case running as main
+	if _, err := os.Stat(pwd + "/" + fileName); os.IsNotExist(err) {
+		filePath = pwd + "/day01/" + fileName
+	} else {
+		filePath = pwd + "/" + fileName
+	}
+	if err != nil {
+		return nil, err
+	}
 
 	// open fstream
 	file, err := os.Open(filePath)
@@ -36,9 +46,10 @@ func importInput(fileName string) (values []int, err error) {
 }
 
 func ansOne(values []int) (summed [2]int, err error) {
+	lenV := len(values)
 
 	// naive approach
-	for idx, n := range values {
+	for idx, n := range values[:lenV] {
 		for _, m := range values[idx+1:] {
 			if n+m == 2020 {
 				return [2]int{n, m}, nil
@@ -51,7 +62,7 @@ func ansOne(values []int) (summed [2]int, err error) {
 
 func ansTwo(values []int) (summed [3]int, err error) {
 	// naive approach
-	for idx, n := range values {
+	for idx, n := range values[:] {
 		for jdx, m := range values[idx+1:] {
 			for _, o := range values[jdx+1:] {
 				if n+m+o == 2020 {
