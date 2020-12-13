@@ -19,22 +19,7 @@ type Pass struct {
 }
 
 // Get raw input from file
-func (p *Puzzle) Input(FileName string) (passes []string, err error) {
-
-	// get correct filepath
-	var filePath string
-	pwd, err := os.Getwd()
-	if err != nil {
-		return nil, err
-	}
-	if _, err := os.Stat(pwd + "/" + FileName); os.IsNotExist(err) {
-		filePath = pwd + "/day05/" + FileName
-	} else {
-		filePath = pwd + "/" + FileName
-	}
-	if err != nil {
-		return passes, err
-	}
+func Input(filePath string) (passes []string, err error) {
 
 	//open fstream
 	file, err := os.Open(filePath)

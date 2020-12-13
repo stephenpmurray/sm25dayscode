@@ -34,10 +34,8 @@ func TestPuzzle_Input(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			p := &Puzzle{
-				Passes: tt.fields.Passes,
-			}
-			gotPasses, err := p.Input(tt.args.FileName)
+
+			gotPasses, err := Input(tt.args.FileName)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Puzzle.Input() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -110,7 +108,7 @@ func TestPuzzle_AnsOne(t *testing.T) {
 		{
 			name:    "return correct max value",
 			fields:  fields{[]Pass{{Row: 0, Col: 7}, {Row: 127, Col: 0}, {Row: 64, Col: 7}}},
-			wantMax: 448,
+			wantMax: 1016,
 			wantErr: false,
 		},
 	}
