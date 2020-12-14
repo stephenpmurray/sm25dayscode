@@ -37,7 +37,12 @@ func main() {
 	if err != nil {
 		os.Exit(1)
 	}
-	runes := day06.ProcInput(input)
-	fmt.Println("Day6: sum of counts is", day06.AnsOne(runes))
+	runes := day06.ProcInputSets(input)
+	fmt.Println("Day6 Part 1 is", day06.AnsOne(runes))
+	msets, ppl := day06.ProcInputFull(input)
+	ans, err := day06.AnsTwo(runes, msets, ppl)
+	if err == nil {
+		fmt.Println("Day6 Part 2 is", ans)
+	}
 
 }
