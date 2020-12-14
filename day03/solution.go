@@ -1,10 +1,5 @@
 package day03
 
-import (
-	"bufio"
-	"os"
-)
-
 const tree = rune('#')
 const space = rune('.')
 
@@ -12,56 +7,38 @@ type Puzzle struct {
 	Map [][]rune
 }
 
-// TODO: Use Interfaces to declare input() and Processline functions
-
 func (p *Puzzle) readTreeLine(line string) {
 	p.Map = append(p.Map, []rune(line))
 }
 
-func (p *Puzzle) Input(FileName string) (err error) {
-
-	// get correct filepath
-	var filePath string
-	pwd, err := os.Getwd()
-	if err != nil {
-		return err
-	}
-	if _, err := os.Stat(pwd + "/" + FileName); os.IsNotExist(err) {
-		filePath = pwd + "/day03/" + FileName
-	} else {
-		filePath = pwd + "/" + FileName
-	}
-	if err != nil {
-		return err
-	}
-
-	//open fstream
-	file, err := os.Open(filePath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	// read in lines of file
-	s := bufio.NewScanner(file)
-	if err != nil {
-		return err
-	}
-	for s.Scan() {
-		line := s.Text()
+func (p *Puzzle) ReadAllTreeLines(lines []string) {
+	for _, line := range lines {
 		p.readTreeLine(line)
 	}
-
-	return nil
 }
 
-(*Puzzle) func GetAnswer() {
-	r = 0
-	c = 0
-	nTrees = 0
-	oob = false // out of bounds
+func (p *Puzzle) Ans(strdR, strdC int) int {
+	rdx := 0
+	cdx := 0
+	r := len(p.Map)
+	c := len(p.Map[0])
+	trees := 0
 
 	for {
-		
+		// get to the bottom
+		if rdx >= r {
+			break
+		}
+		// wraparound
+		if cdx >= c {
+			cdx -= c
+		}
+
+		if p.Map[rdx][cdx] == tree {
+			trees += 1
+		}
+		cdx += strdC
+		rdx += strdR
 	}
+	return trees
 }

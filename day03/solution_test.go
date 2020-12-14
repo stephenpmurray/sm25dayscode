@@ -13,15 +13,15 @@ func TestPuzzle_readTreeLine(t *testing.T) {
 		line string
 	}
 	tests := []struct {
-		name       string
-		fields     fields
-		args       args
-		wantValues [][]rune
+		name    string
+		fields  fields
+		args    args
+		wantMap [][]rune
 	}{
 		{
-			name:       "return success when line is appended to map array",
-			args:       args{"..#"},
-			wantValues: [][]rune{{'.', '.', '#'}},
+			name:    "Read line correctly to Map struct",
+			args:    args{"..##.."},
+			wantMap: [][]rune{{'.', '.', '#', '#', '.', '.'}},
 		},
 	}
 	for _, tt := range tests {
@@ -30,38 +30,30 @@ func TestPuzzle_readTreeLine(t *testing.T) {
 				Map: tt.fields.Map,
 			}
 			p.readTreeLine(tt.args.line)
-			if !reflect.DeepEqual(p.Map, tt.wantValues) {
-				t.Errorf("p.Map = %v \n want %v", p.Map, tt.wantValues)
+			if !reflect.DeepEqual(tt.wantMap, p.Map) {
+				t.Errorf("Problem in TestPuzzle_readTreeLine() Got %v want %v", p.Map, tt.wantMap)
 			}
 		})
 	}
 }
 
-func TestPuzzle_Input(t *testing.T) {
+func TestPuzzle_ReadAllTreeLines(t *testing.T) {
 	type fields struct {
 		Map [][]rune
 	}
 	type args struct {
-		FileName string
-		ProcLine func(string)
+		lines []string
 	}
 	tests := []struct {
-		name       string
-		fields     fields
-		args       args
-		wantValues [][]rune
-		wantErr    bool
+		name    string
+		fields  fields
+		args    args
+		wantMap [][]rune
 	}{
 		{
-			name:    "return error when filename is bad",
-			args:    args{FileName: "bad_filename"},
-			wantErr: true,
-		},
-		{
-			name:       "return success when file is read correctly",
-			args:       args{"testinput", p.readTreeLine()}, // TODO: Mock the struct and method
-			wantValues: [][]rune{{'#', '#', '.', '.'}, {'.', '#', '.', '#'}},
-			wantErr:    false,
+			name:    "Correctly read input to p.Map[]",
+			args:    args{[]string{"..##..", "##...."}},
+			wantMap: [][]rune{{'.', '.', '#', '#', '.', '.'}, {'#', '#', '.', '.', '.', '.'}},
 		},
 	}
 	for _, tt := range tests {
@@ -69,11 +61,47 @@ func TestPuzzle_Input(t *testing.T) {
 			p := &Puzzle{
 				Map: tt.fields.Map,
 			}
-			if err := p.Input(tt.args.FileName, tt.args.ProcLine); (err != nil) != tt.wantErr {
-				t.Errorf("Puzzle.Input() error = %v, wantErr %v", err, tt.wantErr)
+			p.ReadAllTreeLines(tt.args.lines)
+			if !reflect.DeepEqual(tt.wantMap, p.Map) {
+				t.Errorf("Problem in TestPuzzle_ReadAllTreeLine() Got %v want %v", p.Map, tt.wantMap)
 			}
-			if !reflect.DeepEqual(p.Map, tt.wantValues) {
-				t.Errorf("p.Map = %v \n want %v", p.Map, tt.wantValues)
+		})
+	}
+}
+
+func TestPuzzle_Ans(t *testing.T) {
+	type fields struct {
+		Map [][]rune
+	}
+	type args struct {
+		strdR int
+		strdC int
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   int
+	}{
+		{
+			name: "Return correct sum",
+			fields: fields{
+				[][]rune{
+					{'.', '.', '.', '.'},
+					{'.', '.', '.', '#'},
+				},
+			},
+			args: args{1, 3},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			p := &Puzzle{
+				Map: tt.fields.Map,
+			}
+			if got := p.Ans(tt.args.strdR, tt.args.strdC); got != tt.want {
+				t.Errorf("Puzzle.AnsOne() = %v, want %v", got, tt.want)
 			}
 		})
 	}

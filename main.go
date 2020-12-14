@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day01"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day02"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day03"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day05"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day06"
 )
@@ -19,12 +21,27 @@ func main() {
 	if err != nil {
 		os.Exit(1)
 	}
-	fmt.Println("Day Two Part One: ", day2.AnsTwoOne())
-	fmt.Println("Day Two Part One: ", day2.AnsTwoTwo())
-	/*
-		var p day03.Puzzle
-		p.Input("input")
-	*/
+	fmt.Println("Day 2 Part 1: ", day2.AnsTwoOne())
+	fmt.Println("Day 2 Part 1: ", day2.AnsTwoTwo())
+
+	// day 3 answers
+	input, err := day05.Input("./day03/input")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var p3 day03.Puzzle
+	p3.ReadAllTreeLines(input)
+	fmt.Println("Day3 Part 1: ", p3.Ans(1, 3), "trees")
+	p2Ins := [][]int{{1, 1}, {1, 3}, {1, 5}, {1, 7}, {2, 1}}
+	prod := p3.Ans(p2Ins[0][0], p2Ins[0][1])
+	for _, pair := range p2Ins[1:] {
+		prod *= p3.Ans(pair[0], pair[1])
+	}
+	fmt.Println("Day3 Part 2: ", prod, "trees")
+
+	// day 4 answers
+
+	// day 5 answers
 	var p5 day05.Puzzle
 	passes, err := day05.Input("./day05/input")
 	p5.ReadPassports(passes)
@@ -33,9 +50,9 @@ func main() {
 	fmt.Println("Day5: Your seat id is", p5.AnsTwo())
 
 	//day 6 answers
-	input, err := day05.Input("./day06/input")
+	input, err = day05.Input("./day06/input")
 	if err != nil {
-		os.Exit(1)
+		log.Fatal(err)
 	}
 	runes := day06.ProcInputSets(input)
 	fmt.Println("Day6 Part 1 is", day06.AnsOne(runes))
