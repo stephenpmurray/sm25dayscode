@@ -16,9 +16,9 @@ func Test_ProcInput(t *testing.T) {
 	}{
 		{
 			"return correct 2d rune slices for given input",
-			args{[]string{"abc", "", "a", "b", "c", "", "a", "a", "", "ab", "a"}},
+			args{[]string{"abc", "", "a", "b", "c", "", "a", "a", "", "ab", "ad"}},
 			// [][]rune{{'a', 'b', 'c'}, {'a', 'b', 'c'}, {'a'}},
-			[]int{294, 294, 97, 195},
+			[]int{294, 294, 97, 295},
 		},
 	}
 	for _, tt := range tests {

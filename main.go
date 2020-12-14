@@ -7,6 +7,7 @@ import (
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day01"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day02"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day05"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day06"
 )
 
 func main() {
@@ -30,4 +31,13 @@ func main() {
 	max, _ := p5.AnsOne()
 	fmt.Println("Day5: Maximum value is", max)
 	fmt.Println("Day5: Your seat id is", p5.AnsTwo())
+
+	//day 6 answers
+	input, err := day05.Input("./day06/input")
+	if err != nil {
+		os.Exit(1)
+	}
+	runes := day06.ProcInput(input)
+	fmt.Println("Day6: sum of counts is", day06.AnsOne(runes))
+
 }
