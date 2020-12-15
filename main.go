@@ -8,6 +8,7 @@ import (
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day01"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day02"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day03"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day04"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day05"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day06"
 )
@@ -40,6 +41,13 @@ func main() {
 	fmt.Println("Day3 Part 2: ", prod, "trees")
 
 	// day 4 answers
+	input, err = day05.Input("./day04/input")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var p4 day04.Puzzle
+	p4.ReadPassports(input)
+	fmt.Println("Day4 Part 1: ", p4.AnsOne(), "valid passports")
 
 	// day 5 answers
 	var p5 day05.Puzzle
