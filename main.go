@@ -17,6 +17,7 @@ func main() {
 
 	day01.RunDay01()
 
+	// day 2
 	var day2 day02.PuzzInput
 	err := day2.Import("input")
 	if err != nil {
@@ -47,7 +48,13 @@ func main() {
 	}
 	var p4 day04.Puzzle
 	p4.ReadPassports(input)
+	// fmt.Println("", p4.Records[287])
 	fmt.Println("Day4 Part 1: ", p4.AnsOne(), "valid passports")
+	ans, err := p4.AnsTwo()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Day4 Part 2: ", ans, "valid passports")
 
 	// day 5 answers
 	var p5 day05.Puzzle
@@ -65,7 +72,7 @@ func main() {
 	runes := day06.ProcInputSets(input)
 	fmt.Println("Day6 Part 1 is", day06.AnsOne(runes))
 	msets, ppl := day06.ProcInputFull(input)
-	ans, err := day06.AnsTwo(runes, msets, ppl)
+	ans, err = day06.AnsTwo(runes, msets, ppl)
 	if err == nil {
 		fmt.Println("Day6 Part 2 is", ans)
 	}
