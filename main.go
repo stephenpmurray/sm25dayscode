@@ -11,6 +11,7 @@ import (
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day04"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day05"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day06"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day08"
 )
 
 func main() {
@@ -77,4 +78,15 @@ func main() {
 		fmt.Println("Day6 Part 2 is", ans)
 	}
 
+	// day 8 answers
+	input, err = day05.Input("./day08/input")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var p8 day08.Puzzle
+	err = p8.ProcInput(input)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Day 8 part 1 is ", p8.AnsOne())
 }
