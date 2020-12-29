@@ -88,5 +88,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Day 8 part 1 is ", p8.AnsOne())
+	ans, _, _ = p8.CheckRun()
+	fmt.Println("Day 8 part 1 is ", ans)
+	_, acc, err := p8.AnsTwo()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Day 8 part 2 ends with accumulator", acc)
+
 }
