@@ -12,6 +12,7 @@ import (
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day05"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day06"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day08"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day09"
 )
 
 func main() {
@@ -96,4 +97,21 @@ func main() {
 	}
 	fmt.Println("Day 8 part 2 ends with accumulator", acc)
 
+	// day 9 answers
+	input, err = day05.Input("./day09/input")
+	if err != nil {
+		log.Fatal(err)
+	}
+	ints, err := day09.ProcInput(input)
+	if err != nil {
+		log.Fatal(err)
+	}
+	ans, err = day09.AnsOne(25, ints)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Day 9 Part 1:", ans)
+	start, end := day09.FindRun(ans, ints)
+	min, max := day09.GetMinMax(start, end, ints)
+	fmt.Println("Day 9 Part 2:", min+max)
 }
