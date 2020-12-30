@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day01"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day02"
@@ -13,6 +14,7 @@ import (
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day06"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day08"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day09"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day10"
 )
 
 func main() {
@@ -114,4 +116,22 @@ func main() {
 	start, end := day09.FindRun(ans, ints)
 	min, max := day09.GetMinMax(start, end, ints)
 	fmt.Println("Day 9 Part 2:", min+max)
+
+	// day 10 answers
+	input, err = day05.Input("./day10/input")
+	if err != nil {
+		log.Fatal(err)
+	}
+	ints, err = day09.ProcInput(input)
+	if err != nil {
+		log.Fatal(err)
+	}
+	sort.Slice(ints, func(i, j int) bool { return ints[i] < ints[j] })
+	ans, err = day10.AnsOne(ints)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Day 10 Part 1:", ans)
+	fmt.Println("Day 10 Part 2:", day10.AnsTwo(ints))
+
 }
