@@ -15,6 +15,8 @@ import (
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day08"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day09"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day10"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day11"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day12"
 )
 
 func main() {
@@ -134,4 +136,36 @@ func main() {
 	fmt.Println("Day 10 Part 1:", ans)
 	fmt.Println("Day 10 Part 2:", day10.AnsTwo(ints))
 
+	//day11
+	input, err = day05.Input("./day11/input")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var p11 day11.FloorPlan
+	p11.GetFLoorplan(input)
+	fmt.Println("Day 11 part 1:", p11.AnsOne())
+	fmt.Println("Day 11 part 1:", p11.AnsTwo())
+
+	// day12
+	var p, waypt day12.Position
+	input, err = day05.Input("./day12/input")
+	if err != nil {
+		log.Fatal(err)
+	}
+	insts, err := day12.GetInput(input)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// set start facing east
+	ans, err = p.ApplyInstruct(insts)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("day 12 part 1: ", ans)
+	p = day12.Position{}
+	ans, err = p.ApplyInstruct2(insts, waypt)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("day 12 part 2: ", ans)
 }
