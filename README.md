@@ -33,4 +33,13 @@ multiply them together.
 the sum of the previous three entries in the sequence:
 1,1,2,4,7,13 ...
 
+## Day 12
+
+### Part 2
+ - Floating Point Math is expensive, therefore use integer rules.
+ - A rotation of 180&deg; is simply a sign change such that `x,y -> -x,-y`
+ - A rotation of +270&deg; = -90&deg; and so on.
+ - For clockwise turns, `x,y(+90&deg;) = y,-x(0&deg;)`.
+ - For widdershins turns, `x,y(-90&deg;) = -y,x(0&deg;)`.
+ - This is all a lot easier if you assume the origin for the waypoint is the boat.
 
