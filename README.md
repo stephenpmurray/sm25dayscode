@@ -34,3 +34,5 @@ the sum of the previous three entries in the sequence:
 1,1,2,4,7,13 ...
 
 
+## Day 13
+ - Trick here is to avoid floating point arithmetic, adn use integer division.

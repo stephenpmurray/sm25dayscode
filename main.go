@@ -17,6 +17,7 @@ import (
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day10"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day11"
 	"githhub.com/stephenmurrayengineer/sm25dayscode/day12"
+	"githhub.com/stephenmurrayengineer/sm25dayscode/day13"
 )
 
 func main() {
@@ -168,4 +169,15 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println("day 12 part 2: ", ans)
+
+	//day13
+	input, err = day05.Input("./day13/input")
+	if err != nil {
+		log.Fatal(err)
+	}
+	t0, b, err := day13.GetInput(input)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("day 13 part 1:", day13.AnsOne(t0, b))
 }
